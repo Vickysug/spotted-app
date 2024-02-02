@@ -1,5 +1,10 @@
-function User(id, firstName, lastName, emailAddress, username, password, avatar) {
-  this.id = id;
+/* global userRepository */
+
+// Define the JSONPlaceholder API URL
+var jsonPlaceholderApiUrl = 'https://jsonplaceholder.typicode.com/users';
+
+function User(firstName, lastName, emailAddress, username, password, avatar) {
+  this.id = 1;
   this.firstName = firstName;
   this.lastName = lastName;
   this.emailAddress = emailAddress;
@@ -8,26 +13,32 @@ function User(id, firstName, lastName, emailAddress, username, password, avatar)
   this.avatar = avatar;
 }
 
-fetch('https://jsonplaceholder.typicode.com/users')
-  .then(response => response.json())
-  .then(data => {
-    data.forEach(user => {
-      var names = user.name.split(' ');
-      var firstName = names[0];
-      var lastName = names.slice(1).join(' ');
-      var usernameInLowercase = user.username.toLowerCase();
+// Define the callback function
+function handleFetchUserClick() {
+  fetch(jsonPlaceholderApiUrl)
+    .then(response => response.json())
+    .then(data => {
+      data.forEach(user => {
+        var names = user.name.split(' ');
+        var firstName = names[0];
+        var lastName = names.slice(1).join(' ');
+        var username = user.username.toLowerCase();
+        var uuid = self.crypto.randomUUID();
+        var userAvatarString = 'https://i.pravatar.cc/150?u=' + uuid;
 
-      var newUser = new User(
-        user.id,
-        firstName,
-        lastName,
-        user.email,
-        usernameInLowercase,
-        'temporaryPassword',
-        'https://i.pravatar.cc/300'
-      );
+        var newUser = new User(
+          firstName,
+          lastName,
+          user.email,
+          username,
+          'temporaryPassword',
+          userAvatarString
+        );
 
-      userRepository.saveUser(newUser); // Use userRepository to save the user
-      console.log(newUser)
+        userRepository.createUser(newUser); // Use userRepository to save the user
+      });
     });
-  })
+}
+
+// Attach the event listener
+document.getElementById('buttonId').addEventListener('click', handleFetchUserClick);
