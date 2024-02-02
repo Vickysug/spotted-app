@@ -33,7 +33,7 @@ function saveEntityToLocalStorage(entity, key) {
 function getNextSequenceForEntity(key) {
   try {
     // Retrieves the stored data from localStorage
-    const storedData = loadEntityFromLocalStorage(key);
+    const storedData = JSON.parse(localStorage.getItem(key));
 
     let nextId = false;
 

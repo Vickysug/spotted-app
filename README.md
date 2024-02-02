@@ -1,4 +1,4 @@
-# Application Summary
+# Skills Bootcamp Module 8 - Weather Dashboard
 
 A group project with 6 team members are to create an app that uses at least two new server-side APIs.
 
