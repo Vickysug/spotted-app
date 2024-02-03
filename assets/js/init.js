@@ -17,6 +17,7 @@ async function handleAppInitialisationModal() {
 
     // Hides the message modal
     messageModal.hide();
+    appInitialisationModal.addClass('hidden');
   } catch (error) {
     // Handles any errors that may occur during the initialisation process
     console.error('Error occurred during app initialisation:', error);
