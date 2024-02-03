@@ -4,10 +4,6 @@
   "description": "A group project with 6 team members are to create an app that uses at least two new server-side APIs.",
   "main": "index.js",
   "scripts": {
-    "build": "tailwindcss -i  ./input.css -o ./css/main.css",
-    "watch": "tailwindcss -i  ./input.css -o ./css/main.css --watch"
-    
-
   },
   "keywords": [],
   "author": "",

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Register form</title>
+</head>
+<body>
+  <div class="w-screen h-screen bg-gray-50 flex justify-center">
+    <!-- Signup container-->
+    <div class="max-w-md border-1 rounded-2xl shadow-lg my-14 bg-white opacity-90 ">
+    <!-- form -->
+      <div class="flex justify-center my-4">
+        <h1 class="text-3xl text-[#604C96] font-bold py-4">Sign up</h1>
+      </div>
+      <div class="flex-col justify-center">
+      <form>
+        <!-- Name Field -->
+        <div class="mb2 px-4 py-2 mt-2">
+          <label class="text-zinc-600 font-bold">Name
+            <spam class="text-red-600">*</spam>
+          </label>
+          <input type="text" class="border-2 rounded-2xl w-full px-6 py-2" placeholder="Full name" required autofocus>
+        </div>
+        <!-- Email Field -->
+        <div class="mb2 px-4 py-2 mt-2">
+          <label class="text-zinc-600 font-bold">Email
+            <spam class="text-red-600">*</spam>
+          </label>
+          <input type="email" class="border-2 rounded-2xl w-full px-6 py-2" placeholder="example@email.com" required>
+        </div>
+        <!-- Password Field -->
+        <div class="mb2 px-4 py-2 mt-2">
+          <label class="text-zinc-600 font-bold">Password
+            <spam class="text-red-600">*</spam>
+          </label>
+          <input type="password" class="border-2 rounded-2xl w-full px-6 py-2" placeholder="********" required>
+        </div>
+        <!--Confirm Password Field-->
+        <div class="mb2 px-4 py-2 mt-2">
+          <label class="text-zinc-600 font-bold">Confirm Password
+            <spam class="text-red-600">*</spam>
+          </label>
+          <input type="password" class="border-2 rounded-2xl w-full px-6 py-2" placeholder="********" required>
+        </div>
+        <!-- Remember User input => saved to local storage -->
+        <div class="mb2 flex justify-center">
+          <input type="checkbox" placeholder="checkbox">
+          <label class="px-2">Remember Me</label>
+        </div>
+        <!-- Submit Field -->
+        <div class="mb2 flex justify-center py-3">
+          <a href="">
+            <button class="mt-2 rounded-2xl px-4
+              bg-[#614c97]  
+              text-white py-2 
+              hover:bg-[#9380c7] 
+              hover:scale-105 duration-300" 
+              type="submit">Submit
+            </button>
+          </a>
+        </div>
+
+        <div>
+          <p class="mt-1 text-sm py-3 text-center">Have an account?<a href="" class="px-1 text-purple-900">Sign in</a></p>
+        </div>
+        
+      </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
