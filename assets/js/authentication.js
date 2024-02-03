@@ -1,3 +1,4 @@
+/* global userRepository */
 const persistenceTokenKey = 'jwt-token';
 function loadTokenFromSessionStorage() {
   // Retrieves the stored data from sessionStorage
@@ -44,9 +45,9 @@ function SecurityContext() {
     }
   };
   // Checks if user credentials are correct
-  this.isCredentialsCorrect = function (username, password) {
+  this.isCredentialsCorrect = function (emailAddress, password) {
     try {
-      const user = userRepository.findUserByUsername(username);
+      const user = userRepository.findUserByEmail(emailAddress);
       if (!user) return false;
 
       return user.password === password;
@@ -56,10 +57,10 @@ function SecurityContext() {
     }
   };
   // Checks for user credentials are correct and generate authentication token
-  this.authenticateUser = function (username, password) {
+  this.authenticateUser = function (emailAddress, password) {
     try {
-      if (this.isCredentialsCorrect(username, password)) {
-        saveTokenToSessionStorage(userRepository.findUserByUsername(username));
+      if (this.isCredentialsCorrect(emailAddress, password)) {
+        saveTokenToSessionStorage(userRepository.findUserByEmail(emailAddress));
       }
       return this.getAuthenticationToken();
     } catch (error) {
