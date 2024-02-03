@@ -22,6 +22,9 @@ function fetchingPlaceholderPosts() {
         var newPost = new Post(post.userId, post.body);
         postRepository.createPost(newPost);
       });
+    })
+    .catch(error => {
+      console.log(error);
     });
 }
 
