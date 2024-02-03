@@ -31,9 +31,9 @@ function handleFetchingUsersFromApi() {
         const newUser = new User(
           firstName,
           lastName,
-          user.email,
+          user.email.toLowerCase(),
           user.username.toLowerCase(),
-          'temporaryPassword',
+          '12345',
           `https://i.pravatar.cc/150?u=${crypto.randomUUID()}`,
         );
 
