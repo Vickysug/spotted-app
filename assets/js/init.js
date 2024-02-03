@@ -1,4 +1,4 @@
-const appInitialisationModal = $('#app-initiation');
+const appInitialisationModal = $('#app-initiation-modal');
 const initiateEl = $('#initiate');
 const inProgressEl = $('#in-progress');
 
