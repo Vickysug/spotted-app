@@ -8,3 +8,9 @@ function capitaliseFirstLetter(string) {
   // Join the capitalised words back into a single string
   return capitalisedWords.join(' ');
 }
+
+function delay(ms) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
+}
