@@ -1,3 +1,4 @@
+/* global messageModal, delay,handleFetchingPostsFromApi,handleFetchingUsersFromApi */
 const initiateEl = $('#initiate'); // Element used to initiate data generation.
 const inProgressEl = $('#in-progress'); // Element indicating progress of data generation
 const appInitialisationModal = $('#app-initiation-modal'); // Modal element for application initialisation
