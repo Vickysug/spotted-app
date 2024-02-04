@@ -24,10 +24,12 @@ function handleDisplayingUserSettingsMenu() {
   $('#display-name').text(`${user.firstName} ${user.lastName}`);
   $('#email-address').text(user.emailAddress);
 }
-
+// Checks if jwt-token key exists in sessionStorage
 if (!('jwt-token' in sessionStorage)) {
+  // Displays main login button
   loginButtonCTA.removeClass('hidden');
 } else {
+  // Renders user settings menu if a logged in user exists
   handleDisplayingUserSettingsMenu();
 }
 
@@ -58,23 +60,52 @@ async function handleUserLogin(event) {
     await delay(2000);
 
     if (!isCredentialsCorrect) {
+      // Sets the class of the password element to indicate a validation error
       passwordElement.attr('class', formValidationError);
+
+      // Sets the class of the email element to indicate a validation error
       emailElement.attr('class', formValidationError);
+
+      // Removes the 'hidden' class from the invalid feedback element to make it visible
       invalidFeedbackElement.removeClass('hidden');
+
+      // Removes the 'hidden' class from the login button element to make it visible
       loginButtonEl.removeClass('hidden');
+
+      // Adds the 'hidden' class to the element indicating login progress to hide it
       loginInProgressEl.addClass('hidden');
     } else {
+      // Sets the class of the password element to indicate successful validation
       passwordElement.attr('class', formValidationSuccess);
+
+      // Sets the class of the email element to indicate successful validation
       emailElement.attr('class', formValidationSuccess);
 
+      // Awaits a delay of 1000 milliseconds (1 second)
       await delay(1000);
+
+      // Authenticates the user with the provided email and password
       securityContext.authenticateUser(email, password);
+
+      // Handles the displaying of the user settings menu
       handleDisplayingUserSettingsMenu();
+
+      // Hides the message modal
       messageModal.hide();
+
+      // Adds the 'hidden' class to the user login modal to hide it
       userLoginModal.addClass('hidden');
+
+      // Adds the 'hidden' class to the invalid feedback element to hide it
       invalidFeedbackElement.addClass('hidden');
+
+      // Removes the 'hidden' class from the login button element to make it visible
       loginButtonEl.removeClass('hidden');
+
+      // Adds the 'hidden' class to the element indicating login progress to hide it
       loginInProgressEl.addClass('hidden');
+
+      // Adds the 'hidden' class to the call-to-action login button to hide it
       loginButtonCTA.addClass('hidden');
     }
   } catch (error) {
@@ -85,9 +116,16 @@ async function handleUserLogin(event) {
 }
 
 function handleUserSignOut() {
+  // Removes the JWT token from sessionStorage to sign the user out
   sessionStorage.removeItem('jwt-token');
+
+  // Removes the 'hidden' class from the call-to-action login button to make it visible
   loginButtonCTA.removeClass('hidden');
+
+  // Hides the user settings menu dropdown
   userSettingsMenuDropdown.hide();
+
+  // Adds the 'hidden' class to the user settings button to hide it
   userSettingsButtonEl.addClass('hidden');
 }
 
