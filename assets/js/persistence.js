@@ -172,6 +172,23 @@ function UserRepository() {
     }
   };
 
+  this.findUserByEmail = function (emailAddress) {
+    try {
+      let foundUser = false;
+      const usersMap = loadEntityFromLocalStorage('users');
+
+      usersMap.forEach((value) => {
+        if (value.emailAddress === emailAddress) {
+          foundUser = value;
+        }
+      });
+      return foundUser;
+    } catch (error) {
+      console.error('Error retrieving users from localStorage:', error);
+      return false;
+    }
+  };
+
   this.getAllPostsByUserId = function (userId) {
     try {
       let allPosts = false;

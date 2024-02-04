@@ -1,7 +1,7 @@
 /* global userRepository */
 
 // Define the JSONPlaceholder API URL
-const JSON_PLACEHOLDER_Api_Url = 'https://jsonplaceholder.typicode.com/users';
+const JSON_PLACEHOLDER_USER_API = 'https://jsonplaceholder.typicode.com/users';
 
 function User(firstName, lastName, emailAddress, username, password, avatar) {
   this.id = 1;
@@ -14,38 +14,33 @@ function User(firstName, lastName, emailAddress, username, password, avatar) {
 }
 
 // Define the callback function
-function handleFetchUserClick() {
-  fetch(JSON_PLACEHOLDER_Api_Url)
-    .then(response => {
+function handleFetchingUsersFromApi() {
+  fetch(JSON_PLACEHOLDER_USER_API)
+    .then((response) => {
       if (!response.ok) {
         throw new Error('User cannot be fetched.');
       }
       return response.json();
     })
-    .then(data => {
-      data.forEach(user => {
-        var names = user.name.split(' ');
-        var firstName = names[0];
-        var lastName = names.slice(1).join(' ');
+    .then((data) => {
+      data.forEach((user) => {
+        const names = user.name.split(' ');
+        const firstName = names[0];
+        const lastName = names.slice(1).join(' ');
 
         const newUser = new User(
           firstName,
           lastName,
-          user.email,
+          user.email.toLowerCase(),
           user.username.toLowerCase(),
-          'temporaryPassword',
-          'https://i.pravatar.cc/150?u=' + crypto.randomUUID(),
+          '12345',
+          `https://i.pravatar.cc/150?u=${crypto.randomUUID()}`,
         );
 
         userRepository.createUser(newUser); // Use userRepository to save the user
       });
     })
-    .catch(error => {
+    .catch((error) => {
       console.log(error);
     });
 }
-// Test the function
-// handleFetchUserClick(); 
-
-// Attach the event listener
-$('buttonId').on('click', handleFetchUserClick);
