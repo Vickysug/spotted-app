@@ -1,28 +1,22 @@
 /*
 * https://flowbite.com/docs/components/modal/#javascript-behaviour
 * */
-const $targetEl = document.getElementById('messageModal');
+const $modalTargetEl = document.getElementById('messageModal');
 
 // options with default values
-const options = {
+const modalOptions = {
   placement: 'centre',
   backdrop: 'static',
   backdropClasses:
         'bg-gray-900/50 dark:bg-gray-900/80 fixed inset-0 z-40',
   closable: true,
-  onHide: () => {
-    console.log('modal is hidden');
-  },
-  onShow: () => {
-    console.log('modal is shown');
-  },
-  onToggle: () => {
-    console.log('modal has been toggled');
-  },
+  onHide: () => {},
+  onShow: () => {},
+  onToggle: () => {},
 };
 
 // instance options object
-const instanceOptions = {
+const modalInstanceOptions = {
   id: 'messageModal',
   override: true,
 };
@@ -31,4 +25,4 @@ const instanceOptions = {
  * $targetEl: required
  * options: optional
  */
-const messageModal = new Modal($targetEl, options, instanceOptions);
+const messageModal = new Modal($modalTargetEl, modalOptions, modalInstanceOptions);
