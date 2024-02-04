@@ -1,6 +1,6 @@
-const appInitialisationModal = $('#app-initiation-modal');
-const initiateEl = $('#initiate');
-const inProgressEl = $('#in-progress');
+const initiateEl = $('#initiate'); // Element used to initiate data generation.
+const inProgressEl = $('#in-progress'); // Element indicating progress of data generation
+const appInitialisationModal = $('#app-initiation-modal'); // Modal element for application initialisation
 
 async function handleAppInitialisationModal() {
   try {
