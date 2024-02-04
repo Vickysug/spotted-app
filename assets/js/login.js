@@ -1,5 +1,5 @@
 /* global securityContext, userRepository, messageModal,
-serialiseFormData, userSettingsMenuDropdown  */
+serialiseFormData, userSettingsMenuDropdown, delay  */
 
 const loginButtonCTA = $('#login-cta'); // Call-to-action button for user login
 const loginButtonEl = $('#login-user'); // Main login button
