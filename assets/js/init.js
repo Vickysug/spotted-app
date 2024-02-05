@@ -31,18 +31,17 @@ async function handleDataInitialisation() {
     const fetchedUsersPromise = handleFetchingPostsFromApi();
     const fetchedPostsPromise = handleFetchingUsersFromApi();
 
-    // Await both promises
+    // Awaits both promises
     const [fetchedUsers, fetchedPosts] = await Promise
       .all([fetchedUsersPromise, fetchedPostsPromise]);
 
-    // Show app initialisation modal after both data fetched successfully
-    // App initialisation modal
+    // Shows app initialisation modal after both data fetched successfully
     await handleAppInitialisationModal();
 
-    // Return fetched data
+    // Returns fetched data
     return { fetchedUsers, fetchedPosts };
   } catch (error) {
-    // Handle any errors that occurred during fetching or initialisation
+    // Handles any errors that occurred during fetching or initialisation
     console.error('Error occurred during data initialisation:', error);
     throw error; // Rethrow the error to propagate it to the caller
   }
