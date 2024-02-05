@@ -1,0 +1,3 @@
+const applicationContext = {
+  resolvedLocation: null,
+};
