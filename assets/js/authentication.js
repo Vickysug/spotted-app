@@ -29,7 +29,13 @@ function SecurityContext() {
   // Retrieves authentication token.
   this.getAuthenticationToken = function () {
     try {
-      return Object.fromEntries(loadTokenFromSessionStorage());
+      let authToken = false;
+
+      if (('jwt-token' in sessionStorage)) {
+        authToken = Object.fromEntries(loadTokenFromSessionStorage());
+      }
+
+      return authToken;
     } catch (error) {
       console.error('Error retrieving authentication token:', error);
       return false;
