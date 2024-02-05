@@ -33,7 +33,7 @@ function saveEntityToLocalStorage(entity, key) {
 function getNextSequenceForEntity(key) {
   try {
     // Retrieves the stored data from localStorage
-    const storedData = JSON.parse(localStorage.getItem(key));
+    const storedData = loadEntityFromLocalStorage(key);
 
     let nextId = false;
 
@@ -162,6 +162,23 @@ function UserRepository() {
 
       usersMap.forEach((value) => {
         if (value.username === username) {
+          foundUser = value;
+        }
+      });
+      return foundUser;
+    } catch (error) {
+      console.error('Error retrieving users from localStorage:', error);
+      return false;
+    }
+  };
+
+  this.findUserByEmail = function (emailAddress) {
+    try {
+      let foundUser = false;
+      const usersMap = loadEntityFromLocalStorage('users');
+
+      usersMap.forEach((value) => {
+        if (value.emailAddress === emailAddress) {
           foundUser = value;
         }
       });
