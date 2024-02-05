@@ -6,7 +6,7 @@ const locationPermissionDismissButton = $('#location-dismiss');
 const locationPermissionMessageEl = $('#location-message');
 const currentLocationButton = $('#current-location');
 const currentLocationToolTipEl = $('#current-location-tooltip');
-let foundLocation;
+let resolvedLocation;
 
 async function handleResolvingAddress(latitude, longitude) {
   try {
@@ -35,7 +35,7 @@ function handleResettingLocationPermissionModal() {
 function handleLocationData(data) {
   handleResettingLocationPermissionModal();
   if (data) {
-    foundLocation = locationMapper(data);
+    resolvedLocation = locationMapper(data);
     currentLocationButton.find('svg').first().addClass('fill-blue-600');
     currentLocationToolTipEl.removeClass('hidden').text(data.display_name);
   }
