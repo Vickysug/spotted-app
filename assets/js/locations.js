@@ -19,7 +19,7 @@ function Location(
   boundingBox,
 ) {
   this.postId = null;
-  this.placeId = placeId;
+  this.id = placeId;
   this.licence = licence;
   this.osmType = osmType;
   this.osmId = osmId;
