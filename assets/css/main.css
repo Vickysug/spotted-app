@@ -1,0 +1,15 @@
+#logo{
+    max-width: 300px;
+    max-height: 200px;
+}
+
+#street-image{
+    max-width: 600px;
+}
+
+body{
+    margin-left: 0px;
+}
+#aside{
+    margin-left: 250px;
+}
