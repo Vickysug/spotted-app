@@ -75,14 +75,14 @@ function SecurityContext() {
     }
   };
   // Logs out user and clears session storage
-  this.logout = function (username) {
+  this.logout = function () {
     try {
       const authToken = this.getAuthenticationToken();
-      if (authToken.username === username) {
+      if (authToken) {
         clearTokenFromSessionStorage();
         return true; // Indicates successful logout
       }
-      return false; // Indicates failed logout (username mismatch)
+      return false; // Indicates failed logout
     } catch (error) {
       console.error('Error during logout:', error);
       return false; // Indicates failed logout (error occurred)
