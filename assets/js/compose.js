@@ -1,5 +1,5 @@
-/* global serialiseFormData, Post, postRepository,
-handleUserLoginModal, securityContext, userRepository, applicationContext, locationRepository */
+/* global Post, postRepository, handleUserLoginModal,
+securityContext, userRepository, applicationContext, locationRepository, delay */
 const quill = new Quill('#editor-container', {
   modules: {
     toolbar: [
@@ -132,7 +132,9 @@ postComposeForm.on('submit', handlePostComposeSubmit);
 async function renderPostList() {
   try {
     // Fetch all posts and users concurrently
-    const [allPosts, allUsers] = await Promise.all([postRepository.findAll(), userRepository.findAll()]);
+    const [allPosts, allUsers] = await Promise.all(
+      [postRepository.findAll(), userRepository.findAll()],
+    );
 
     // Sort posts chronologically
     allPosts.sort((a, b) => a.createdAt - b.createdAt);
@@ -143,10 +145,10 @@ async function renderPostList() {
 
     // Uses map to handle asynchronous tasks and collects promises
     const displayPostPromises = allPosts.map(async (post) => {
-      const user = allUsers.find((user) => user.id === post.userId);
-      if (user) {
+      const foundUser = allUsers.find((user) => user.id === post.userId);
+      if (foundUser) {
         // handleDisplayingPostData returns a promise
-        await handleDisplayingPostData(post.content, user);
+        await handleDisplayingPostData(post.content, foundUser);
       }
     });
 
