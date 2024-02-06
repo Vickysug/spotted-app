@@ -117,7 +117,7 @@ async function handleUserLogin(event) {
 
 function handleUserSignOut() {
   // Removes the JWT token from sessionStorage to sign the user out
-  sessionStorage.removeItem('jwt-token');
+  securityContext.logout();
 
   // Removes the 'hidden' class from the call-to-action login button to make it visible
   loginButtonCTA.removeClass('hidden');
