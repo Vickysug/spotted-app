@@ -1,4 +1,5 @@
-/* global handleResolvingReverseGeoCoding, messageModal, delay, locationMapper */
+/* global handleResolvingReverseGeoCoding, messageModal,
+delay, locationMapper, applicationContext */
 const locationPermissionModal = $('#geocoding-permission-modal');
 const locationPermissionAllowButton = $('#location-allow');
 const locationPermissionInProgressButton = $('#location-in-progress');
@@ -6,7 +7,6 @@ const locationPermissionDismissButton = $('#location-dismiss');
 const locationPermissionMessageEl = $('#location-message');
 const currentLocationButton = $('#current-location');
 const currentLocationToolTipEl = $('#current-location-tooltip');
-let resolvedLocation;
 
 async function handleResolvingAddress(latitude, longitude) {
   try {
@@ -35,7 +35,7 @@ function handleResettingLocationPermissionModal() {
 function handleLocationData(data) {
   handleResettingLocationPermissionModal();
   if (data) {
-    resolvedLocation = locationMapper(data);
+    applicationContext.resolvedLocation = locationMapper(data);
     currentLocationButton.find('svg').first().addClass('fill-blue-600');
     currentLocationToolTipEl.removeClass('hidden').text(data.display_name);
   }
