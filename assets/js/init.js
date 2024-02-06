@@ -1,4 +1,5 @@
-/* global messageModal, delay,handleFetchingPostsFromApi,handleFetchingUsersFromApi */
+/* global messageModal, delay,handleFetchingPostsFromApi,
+handleFetchingUsersFromApi, clearTokenFromSessionStorage, renderPostList */
 const initiateEl = $('#initiate'); // Element used to initiate data generation.
 const inProgressEl = $('#in-progress'); // Element indicating progress of data generation
 const appInitialisationModal = $('#app-initiation-modal'); // Modal element for application initialisation
@@ -15,6 +16,10 @@ async function handleAppInitialisationModal() {
 
     // Sets a flag in localStorage indicating initialisation is done
     localStorage.setItem('initialised', 'true');
+
+    await renderPostList();
+
+    clearTokenFromSessionStorage();
 
     // Hides the message modal
     messageModal.hide();
