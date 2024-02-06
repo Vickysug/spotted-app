@@ -9,7 +9,7 @@ function Post(userId, content) {
 const JSON_PLACEHOLDER_POST_API = 'https://jsonplaceholder.typicode.com/posts?_start=0&_limit=20';
 
 function handleFetchingPostsFromApi() {
-  fetch(JSON_PLACEHOLDER_POST_API)
+  return fetch(JSON_PLACEHOLDER_POST_API)
     .then((response) => {
       if (!response.ok) {
         throw new Error('Post cannot be fetched.');
