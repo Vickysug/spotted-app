@@ -10,10 +10,6 @@ const loginInProgressEl = $('#is-logging'); // Element indicating login process 
 const userSignOutEl = $('#sign-out'); // Button or element for user sign out
 const userSettingsButtonEl = $('#user-menu-button'); // Button or element for accessing user settings/menu
 
-// TODO Add as a Tailwind CSS components.
-const formValidationSuccess = 'bg-green-50 border border-green-500 text-green-900 dark:text-green-400 placeholder-green-700 dark:placeholder-green-500 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-green-500';
-const formValidationError = 'bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 dark:bg-gray-700 focus:border-red-500 block w-full p-2.5 dark:text-red-500 dark:placeholder-red-500 dark:border-red-500';
-
 function handleDisplayingUserSettingsMenu() {
   const authToken = securityContext.getAuthenticationToken();
   const user = userRepository.findUserByUsername(authToken.username);
