@@ -15,7 +15,7 @@ function User(firstName, lastName, emailAddress, username, password, avatar) {
 
 // Define the callback function
 function handleFetchingUsersFromApi() {
-  fetch(JSON_PLACEHOLDER_USER_API)
+  return fetch(JSON_PLACEHOLDER_USER_API)
     .then((response) => {
       if (!response.ok) {
         throw new Error('User cannot be fetched.');

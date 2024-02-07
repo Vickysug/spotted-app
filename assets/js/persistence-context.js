@@ -1,5 +1,6 @@
 const users = new Map();
 const posts = new Map();
+const locations = new Map();
 
 // Function to retrieve entities items from localStorage.
 function loadEntityFromLocalStorage(key) {
@@ -55,7 +56,7 @@ function PostRepository() {
       // Save the updated post to localStorage
       saveEntityToLocalStorage(post, 'posts');
 
-      return true; // Return true if saving succeeds
+      return post; // Return true if saving succeeds
     } catch (error) {
       console.error('Error saving post:', error);
       return false; // Return false if saving fails
@@ -207,3 +208,43 @@ function UserRepository() {
 }
 
 const userRepository = new UserRepository();
+
+function LocationRepository() {
+  this.saveLocation = function (location) {
+    try {
+      // Save the updated location to localStorage
+      saveEntityToLocalStorage(location, 'locations');
+
+      return true; // Return true if saving succeeds
+    } catch (error) {
+      console.error('Error saving location:', error);
+      return false; // Return false if saving fails
+    }
+  };
+
+  this.findAll = function () {
+    try {
+      return Array.from(loadEntityFromLocalStorage('locations').values());
+    } catch (error) {
+      console.error('Error retrieving locations from localStorage:', error);
+      return []; // Return an empty array if retrieval fails
+    }
+  };
+
+  this.findLocationById = function (locationId) {
+    try {
+      let foundLocation = false;
+      const locationsMap = loadEntityFromLocalStorage('locations');
+
+      if (locationsMap.has(locationId)) {
+        foundLocation = locationsMap.get(locationId);
+      }
+      return foundLocation;
+    } catch (error) {
+      console.error('Error retrieving location from localStorage:', error);
+      return []; // Return an empty array if retrieval fails
+    }
+  };
+}
+
+const locationRepository = new LocationRepository();
