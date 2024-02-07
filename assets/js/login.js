@@ -6,7 +6,7 @@ const loginButtonEl = $('#login-user'); // Main login button
 const loginDismissButtonEl = $('#login-dismiss'); // Button to dismiss or close login modal
 const userLoginForm = $('#user-login-form'); // Form element for user login
 const userLoginModal = $('#login-modal'); // Modal for user login
-const loginInProgressEl = $('#is-logging'); // Element indicating login process is in progress
+const submitInProgressEl = $('.in-progress'); // Element indicating login process is in progress
 const userSignOutEl = $('#sign-out'); // Button or element for user sign out
 const userSettingsButtonEl = $('#user-menu-button'); // Button or element for accessing user settings/menu
 
@@ -51,7 +51,7 @@ async function handleUserLogin(event) {
     const invalidFeedbackElement = $('#invalid-feedback');
 
     loginButtonEl.addClass('hidden');
-    loginInProgressEl.removeClass('hidden');
+    submitInProgressEl.removeClass('hidden');
 
     await delay(2000);
 
@@ -69,7 +69,7 @@ async function handleUserLogin(event) {
       loginButtonEl.removeClass('hidden');
 
       // Adds the 'hidden' class to the element indicating login progress to hide it
-      loginInProgressEl.addClass('hidden');
+      submitInProgressEl.addClass('hidden');
     } else {
       // Sets the class of the password element to indicate successful validation
       passwordElement.attr('class', applicationContext.formValidationSuccess);
@@ -99,7 +99,7 @@ async function handleUserLogin(event) {
       loginButtonEl.removeClass('hidden');
 
       // Adds the 'hidden' class to the element indicating login progress to hide it
-      loginInProgressEl.addClass('hidden');
+      submitInProgressEl.addClass('hidden');
 
       // Adds the 'hidden' class to the call-to-action login button to hide it
       loginButtonCTA.addClass('hidden');
