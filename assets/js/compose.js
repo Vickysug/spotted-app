@@ -1,11 +1,6 @@
 /* global Post, postRepository, handleUserLoginModal,
 securityContext, userRepository, applicationContext, locationRepository, delay, Quill */
 const quill = new Quill('#editor-container', {
-  modules: {
-    toolbar: [
-      // ['bold', 'italic', 'underline', 'strike'],
-    ],
-  },
   placeholder: 'Compose an epic...',
   theme: 'bubble',
 });
