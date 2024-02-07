@@ -147,3 +147,12 @@ async function handleUserRegistration(event) {
 }
 
 userRegistrationForm.on('submit', registerSubmitButtonEl, handleUserRegistration);
+
+generatePasswordButtonEl.on('click', (event) => {
+  event.preventDefault();
+  const generatedPassword = generatePassword();
+  registrationPasswordEl.val(generatedPassword);
+  confirmPasswordEl.val(generatedPassword);
+});
+
+registrationDismissEl.on('click', () => messageModal.hide());
