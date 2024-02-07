@@ -215,7 +215,7 @@ function LocationRepository() {
       // Save the updated location to localStorage
       saveEntityToLocalStorage(location, 'locations');
 
-      return true; // Return true if saving succeeds
+      return location; // Return true if saving succeeds
     } catch (error) {
       console.error('Error saving location:', error);
       return false; // Return false if saving fails
