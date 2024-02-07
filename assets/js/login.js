@@ -1,5 +1,5 @@
 /* global securityContext, userRepository, messageModal,
-serialiseFormData, userSettingsMenuDropdown, delay, applicationContext */
+serialiseFormData, userSettingsMenuDropdown, delay, applicationContext, registerButtonCTA */
 
 const loginButtonCTA = $('#login-cta'); // Call-to-action button for user login
 const loginButtonEl = $('#login-user'); // Main login button
@@ -103,6 +103,8 @@ async function handleUserLogin(event) {
 
       // Adds the 'hidden' class to the call-to-action login button to hide it
       loginButtonCTA.addClass('hidden');
+
+      registerButtonCTA.addClass('hidden');
     }
   } catch (error) {
     // Handles any errors that may occur during the signing process
@@ -118,6 +120,8 @@ function handleUserSignOut() {
   // Removes the 'hidden' class from the call-to-action login button to make it visible
   loginButtonCTA.removeClass('hidden');
 
+  registerButtonCTA.removeClass('hidden');
+
   // Hides the user settings menu dropdown
   userSettingsMenuDropdown.hide();
 
@@ -128,6 +132,7 @@ function handleUserSignOut() {
 loginButtonCTA.on('click', handleUserLoginModal);
 userLoginForm.on('submit', loginButtonEl, handleUserLogin);
 loginDismissButtonEl.on('click', () => {
+  userLoginModal.addClass('hidden');
   messageModal.hide();
 });
 
