@@ -57,10 +57,10 @@ async function handleUserLogin(event) {
 
     if (!isCredentialsCorrect) {
       // Sets the class of the password element to indicate a validation error
-      passwordElement.attr('class', formValidationError);
+      passwordElement.attr('class', applicationContext.formValidationError);
 
       // Sets the class of the email element to indicate a validation error
-      emailElement.attr('class', formValidationError);
+      emailElement.attr('class', applicationContext.formValidationError);
 
       // Removes the 'hidden' class from the invalid feedback element to make it visible
       invalidFeedbackElement.removeClass('hidden');
@@ -72,10 +72,10 @@ async function handleUserLogin(event) {
       loginInProgressEl.addClass('hidden');
     } else {
       // Sets the class of the password element to indicate successful validation
-      passwordElement.attr('class', formValidationSuccess);
+      passwordElement.attr('class', applicationContext.formValidationSuccess);
 
       // Sets the class of the email element to indicate successful validation
-      emailElement.attr('class', formValidationSuccess);
+      emailElement.attr('class', applicationContext.formValidationSuccess);
 
       // Awaits a delay of 1000 milliseconds (1 second)
       await delay(1000);
