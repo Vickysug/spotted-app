@@ -1,4 +1,6 @@
-/* global messageModal, serialiseFormData, userRepository, applicationContext, generatePassword  */
+/* global messageModal, serialiseFormData, userRepository, applicationContext,
+generatePassword, userMapper, handleDisplayingUserSettingsMenu, securityContext, loginButtonCTA,
+delay, submitInProgressEl */
 
 const userRegistrationModal = $('#registration-modal');
 
@@ -41,6 +43,9 @@ if (!('jwt-token' in sessionStorage)) {
 }
 
 function handleResettingUserRegistrationForm() {
+  // Clears all input values after saving user.
+  userRegistrationForm.find('input').val('');
+
   firstNameEl.attr('class', applicationContext.formInputDefaultStyle);
   firstNameValidationMessageEl.addClass('hidden');
 
@@ -64,6 +69,7 @@ function validateRegistrationForm(userRegistrationFormDataObject) {
   // Collects errors to validate all fields at the same time
   const errors = [];
 
+  // Deconstructs userRegistrationFormDataObject to retrieve values.
   const {
     firstName,
     lastName,
@@ -94,7 +100,12 @@ function validateRegistrationForm(userRegistrationFormDataObject) {
     lastNameValidationMessageEl.addClass('hidden');
   }
 
-  if (userRepository.findUserByUsername(username)) {
+  if (username.trim() === '') {
+    usernameEl.attr('class', applicationContext.formValidationError);
+    usernameValidationMessageEl.removeClass('hidden');
+    usernameValidationMessageEl.text('Username is empty');
+    errors.push('Username is empty');
+  } else if (userRepository.findUserByUsername(username)) {
     usernameEl.attr('class', applicationContext.formValidationError);
     usernameValidationMessageEl.removeClass('hidden');
     usernameValidationMessageEl.text('Username is not available');
@@ -104,31 +115,16 @@ function validateRegistrationForm(userRegistrationFormDataObject) {
     usernameValidationMessageEl.addClass('hidden');
   }
 
-  if (username.trim() === '') {
-    usernameEl.attr('class', applicationContext.formValidationError);
-    usernameValidationMessageEl.removeClass('hidden');
-    usernameValidationMessageEl.text('Username is empty');
-    errors.push('Username is empty');
-  } else {
-    usernameEl.attr('class', applicationContext.formValidationSuccess);
-    usernameValidationMessageEl.addClass('hidden');
-  }
-
-  if (userRepository.findUserByEmail(registrationEmail)) {
-    registrationEmailEl.attr('class', applicationContext.formValidationError);
-    emailValidationMessageEl.removeClass('hidden');
-    emailValidationMessageEl.text('Email address is not available');
-    errors.push('Email address is not available');
-  } else {
-    registrationEmailEl.attr('class', applicationContext.formValidationSuccess);
-    emailValidationMessageEl.addClass('hidden');
-  }
-
   if (registrationEmail.trim() === '') {
     registrationEmailEl.attr('class', applicationContext.formValidationError);
     emailValidationMessageEl.removeClass('hidden');
     emailValidationMessageEl.text('Email address is empty');
     errors.push('Email address is empty');
+  } else if (userRepository.findUserByEmail(registrationEmail)) {
+    registrationEmailEl.attr('class', applicationContext.formValidationError);
+    emailValidationMessageEl.removeClass('hidden');
+    emailValidationMessageEl.text('Email address is not available');
+    errors.push('Email address is not available');
   } else {
     registrationEmailEl.attr('class', applicationContext.formValidationSuccess);
     emailValidationMessageEl.addClass('hidden');
@@ -159,23 +155,61 @@ function validateRegistrationForm(userRegistrationFormDataObject) {
     passwordValidationMessageEl.addClass('hidden');
   }
 
-  return errors.length === 0 ? userRegistrationFormDataObject : errors;
+  return errors.length === 0 ? userRegistrationFormDataObject : false;
 }
 
 async function handleUserRegistration(event) {
   try {
     event.preventDefault();
 
-    // Constructs an object from input values from the registration form.
+    registerSubmitButtonEl.addClass('hidden');
+    submitInProgressEl.removeClass('hidden');
+
+    // Create a data transfer object (DTO) from registration form data.
     const userRegistrationFormDataObject = serialiseFormData(userRegistrationForm);
 
-    const isFormValidated = validateRegistrationForm(userRegistrationFormDataObject);
+    await delay(2000);
 
+    // Validates registration form
+
+    const isFormValidated = validateRegistrationForm(userRegistrationFormDataObject);
+    // Checks if form inputs are validated
     if (!isFormValidated) {
+      registerSubmitButtonEl.removeClass('hidden');
+      submitInProgressEl.addClass('hidden');
       return false;
     }
+    // Awaits a delay of 1000 milliseconds (1 second)
+    await delay(1000);
+    // Constructs a new user object from the DTO.
+    const registeredUser = userMapper(userRegistrationFormDataObject);
 
-    console.log(userRegistrationFormDataObject);
+    // Creates a new user object, saves it to localStorage and returns it with user ID.
+    const user = userRepository.createUser(registeredUser);
+
+    // Resets user registration form styling and clears all input
+    handleResettingUserRegistrationForm();
+
+    // Authenticates user programmatically to make testing easier
+    securityContext.authenticateUser(user.emailAddress, user.password);
+
+    handleDisplayingUserSettingsMenu();
+
+    messageModal.hide();
+
+    userRegistrationModal.addClass('hidden');
+
+    // Adds the 'hidden' class to the call-to-action login button to hide it
+    loginButtonCTA.addClass('hidden');
+
+    // Adds the 'hidden' class to the call-to-action registration button to hide it
+    registerButtonCTA.addClass('hidden');
+
+    registerSubmitButtonEl.removeClass('hidden');
+
+    submitInProgressEl.addClass('hidden');
+
+    console.log(user);
   } catch (error) {
     // Handles any errors that may occur during the signing process
     console.error('Error occurred during user registration:', error);
