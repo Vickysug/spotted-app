@@ -65,10 +65,12 @@ function SecurityContext() {
   // Checks for user credentials are correct and generate authentication token
   this.authenticateUser = function (emailAddress, password) {
     try {
+      let authToken = false;
       if (this.isCredentialsCorrect(emailAddress, password)) {
         saveTokenToSessionStorage(userRepository.findUserByEmail(emailAddress));
+        authToken = this.getAuthenticationToken();
       }
-      return this.getAuthenticationToken();
+      return authToken;
     } catch (error) {
       console.error('Error authenticating user:', error);
       return false;
