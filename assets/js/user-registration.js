@@ -236,6 +236,5 @@ generatePasswordButtonEl.on('click', (event) => {
 
 registrationDismissEl.on('click', () => {
   messageModal.hide();
-  handleResettingUserRegistrationForm();
   userRegistrationModal.addClass('hidden');
 });
