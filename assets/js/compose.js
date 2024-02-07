@@ -1,5 +1,5 @@
 /* global Post, postRepository, handleUserLoginModal,
-securityContext, userRepository, applicationContext, locationRepository, delay */
+securityContext, userRepository, applicationContext, locationRepository, delay, Quill */
 const quill = new Quill('#editor-container', {
   modules: {
     toolbar: [
@@ -65,6 +65,7 @@ async function handleDisplayingPostData(content, user) {
   const placeholderPostListItemCopy = placeholderPostListItem.clone()
     .removeAttr('data-placeholder')
     .removeClass('hidden');
+  // TODO Display dates
   placeholderPostListItemCopy.find('.content').first().html(content);
   placeholderPostListItemCopy.find('.user-avatar').first().attr('src', user.avatar);
   placeholderPostListItemCopy.find('.user-display-name').first().text(`${user.firstName} ${user.lastName}`);
@@ -122,6 +123,11 @@ async function handlePostComposeSubmit(event) {
 
     // Displays the newly created post
     await handleDisplayingPostData(content, user);
+
+    // Resets location data
+    applicationContext.resolvedLocation = null;
+    currentLocationButton.find('svg').first().removeClass('fill-blue-600');
+    currentLocationToolTipEl.addClass('hidden').text('');
   } catch (error) {
     console.error('Error rendering posts:', error);
   }
