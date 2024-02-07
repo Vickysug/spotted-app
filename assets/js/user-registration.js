@@ -35,8 +35,6 @@ const confirmPasswordEl = $('#registration-confirm-password');
 // Button to generate password
 const generatePasswordButtonEl = $('#generate-password');
 
-// messageModal.show();
-
 if (!('jwt-token' in sessionStorage)) {
   // Displays main register button
   registerButtonCTA.removeClass('hidden');
@@ -63,6 +61,24 @@ function handleResettingUserRegistrationForm() {
 
   confirmPasswordEl.attr('class', applicationContext.formInputDefaultStyle);
   passwordConfirmValidationMessageEl.addClass('hidden');
+
+  // Hides modal
+  messageModal.hide();
+
+  // Adds the 'hidden' to user registration modal
+  userRegistrationModal.addClass('hidden');
+
+  // Adds the 'hidden' class to the call-to-action login button to hide it
+  loginButtonCTA.addClass('hidden');
+
+  // Adds the 'hidden' class to the call-to-action registration button to hide it
+  registerButtonCTA.addClass('hidden');
+
+  // Removes the 'hidden' to registration submit button
+  registerSubmitButtonEl.removeClass('hidden');
+
+  // Adds the 'hidden' to in-progress button
+  submitInProgressEl.addClass('hidden');
 }
 
 function validateRegistrationForm(userRegistrationFormDataObject) {
@@ -190,26 +206,11 @@ async function handleUserRegistration(event) {
     // Resets user registration form styling and clears all input
     handleResettingUserRegistrationForm();
 
-    // Authenticates user programmatically to make testing easier
-    securityContext.authenticateUser(user.emailAddress, user.password);
+    // Authenticates user programmatically and returns authToken to make testing easier
+    const authToken = securityContext.authenticateUser(user.emailAddress, user.password);
 
-    handleDisplayingUserSettingsMenu();
-
-    messageModal.hide();
-
-    userRegistrationModal.addClass('hidden');
-
-    // Adds the 'hidden' class to the call-to-action login button to hide it
-    loginButtonCTA.addClass('hidden');
-
-    // Adds the 'hidden' class to the call-to-action registration button to hide it
-    registerButtonCTA.addClass('hidden');
-
-    registerSubmitButtonEl.removeClass('hidden');
-
-    submitInProgressEl.addClass('hidden');
-
-    console.log(user);
+    // Displays user setting menu after authenticating user
+    if (authToken) handleDisplayingUserSettingsMenu();
   } catch (error) {
     // Handles any errors that may occur during the signing process
     console.error('Error occurred during user registration:', error);
