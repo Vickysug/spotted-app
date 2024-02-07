@@ -33,7 +33,7 @@ function handleFetchingUsersFromApi() {
           lastName,
           user.email.toLowerCase(),
           user.username.toLowerCase(),
-          '12345',
+          generatePassword(),
           `https://i.pravatar.cc/150?u=${crypto.randomUUID()}`,
         );
 
