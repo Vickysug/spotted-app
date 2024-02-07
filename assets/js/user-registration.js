@@ -30,6 +30,7 @@ const generatePasswordButtonEl = $('#generate-password');
 messageModal.show();
 
 function validateRegistrationForm(userRegistrationFormDataObject) {
+  // Collects errors to validate all fields at the same time
   const errors = [];
 
   const {
@@ -141,7 +142,7 @@ async function handleUserRegistration(event) {
     console.log(userRegistrationFormDataObject);
   } catch (error) {
     // Handles any errors that may occur during the signing process
-    console.error('Error occurred user signing:', error);
+    console.error('Error occurred user registration:', error);
     $('#registration-invalid-feedback').removeClass('hidden').text('An unexpected error occurred. Please try again later.');
   }
 }
