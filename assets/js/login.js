@@ -1,18 +1,14 @@
 /* global securityContext, userRepository, messageModal,
-serialiseFormData, userSettingsMenuDropdown, delay  */
+serialiseFormData, userSettingsMenuDropdown, delay, applicationContext, registerButtonCTA */
 
 const loginButtonCTA = $('#login-cta'); // Call-to-action button for user login
 const loginButtonEl = $('#login-user'); // Main login button
 const loginDismissButtonEl = $('#login-dismiss'); // Button to dismiss or close login modal
 const userLoginForm = $('#user-login-form'); // Form element for user login
 const userLoginModal = $('#login-modal'); // Modal for user login
-const loginInProgressEl = $('#is-logging'); // Element indicating login process is in progress
+const submitInProgressEl = $('.in-progress'); // Element indicating login process is in progress
 const userSignOutEl = $('#sign-out'); // Button or element for user sign out
 const userSettingsButtonEl = $('#user-menu-button'); // Button or element for accessing user settings/menu
-
-// TODO Add as a Tailwind CSS components.
-const formValidationSuccess = 'bg-green-50 border border-green-500 text-green-900 dark:text-green-400 placeholder-green-700 dark:placeholder-green-500 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-green-500';
-const formValidationError = 'bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 dark:bg-gray-700 focus:border-red-500 block w-full p-2.5 dark:text-red-500 dark:placeholder-red-500 dark:border-red-500';
 
 function handleDisplayingUserSettingsMenu() {
   const authToken = securityContext.getAuthenticationToken();
@@ -55,16 +51,16 @@ async function handleUserLogin(event) {
     const invalidFeedbackElement = $('#invalid-feedback');
 
     loginButtonEl.addClass('hidden');
-    loginInProgressEl.removeClass('hidden');
+    submitInProgressEl.removeClass('hidden');
 
     await delay(2000);
 
     if (!isCredentialsCorrect) {
       // Sets the class of the password element to indicate a validation error
-      passwordElement.attr('class', formValidationError);
+      passwordElement.attr('class', applicationContext.formValidationError);
 
       // Sets the class of the email element to indicate a validation error
-      emailElement.attr('class', formValidationError);
+      emailElement.attr('class', applicationContext.formValidationError);
 
       // Removes the 'hidden' class from the invalid feedback element to make it visible
       invalidFeedbackElement.removeClass('hidden');
@@ -73,13 +69,13 @@ async function handleUserLogin(event) {
       loginButtonEl.removeClass('hidden');
 
       // Adds the 'hidden' class to the element indicating login progress to hide it
-      loginInProgressEl.addClass('hidden');
+      submitInProgressEl.addClass('hidden');
     } else {
       // Sets the class of the password element to indicate successful validation
-      passwordElement.attr('class', formValidationSuccess);
+      passwordElement.attr('class', applicationContext.formValidationSuccess);
 
       // Sets the class of the email element to indicate successful validation
-      emailElement.attr('class', formValidationSuccess);
+      emailElement.attr('class', applicationContext.formValidationSuccess);
 
       // Awaits a delay of 1000 milliseconds (1 second)
       await delay(1000);
@@ -103,10 +99,12 @@ async function handleUserLogin(event) {
       loginButtonEl.removeClass('hidden');
 
       // Adds the 'hidden' class to the element indicating login progress to hide it
-      loginInProgressEl.addClass('hidden');
+      submitInProgressEl.addClass('hidden');
 
       // Adds the 'hidden' class to the call-to-action login button to hide it
       loginButtonCTA.addClass('hidden');
+
+      registerButtonCTA.addClass('hidden');
     }
   } catch (error) {
     // Handles any errors that may occur during the signing process
@@ -122,6 +120,8 @@ function handleUserSignOut() {
   // Removes the 'hidden' class from the call-to-action login button to make it visible
   loginButtonCTA.removeClass('hidden');
 
+  registerButtonCTA.removeClass('hidden');
+
   // Hides the user settings menu dropdown
   userSettingsMenuDropdown.hide();
 
@@ -132,6 +132,7 @@ function handleUserSignOut() {
 loginButtonCTA.on('click', handleUserLoginModal);
 userLoginForm.on('submit', loginButtonEl, handleUserLogin);
 loginDismissButtonEl.on('click', () => {
+  userLoginModal.addClass('hidden');
   messageModal.hide();
 });
 

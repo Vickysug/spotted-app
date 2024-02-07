@@ -1,4 +1,4 @@
-/* global userRepository */
+/* global userRepository, generatePassword */
 
 // Define the JSONPlaceholder API URL
 const JSON_PLACEHOLDER_USER_API = 'https://jsonplaceholder.typicode.com/users';
@@ -11,6 +11,17 @@ function User(firstName, lastName, emailAddress, username, password, avatar) {
   this.username = username;
   this.password = password;
   this.avatar = avatar;
+}
+
+function userMapper(userRegistrationData) {
+  return new User(
+    userRegistrationData.firstName,
+    userRegistrationData.lastName,
+    userRegistrationData.registrationEmail,
+    userRegistrationData.username,
+    userRegistrationData.registrationPassword,
+    `https://i.pravatar.cc/150?u=${crypto.randomUUID()}`,
+  );
 }
 
 // Define the callback function
@@ -33,7 +44,7 @@ function handleFetchingUsersFromApi() {
           lastName,
           user.email.toLowerCase(),
           user.username.toLowerCase(),
-          '12345',
+          generatePassword(),
           `https://i.pravatar.cc/150?u=${crypto.randomUUID()}`,
         );
 

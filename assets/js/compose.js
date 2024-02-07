@@ -1,5 +1,5 @@
 /* global Post, postRepository, handleUserLoginModal,
-securityContext, userRepository, applicationContext, locationRepository, delay */
+securityContext, userRepository, applicationContext, locationRepository, delay, Quill */
 const quill = new Quill('#editor-container', {
   modules: {
     toolbar: [
@@ -12,30 +12,30 @@ const quill = new Quill('#editor-container', {
 
 $('.ql-editor').addClass('text-gray-800 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400');
 
-// Represents the text editor container element
+// Text editor container element
 const postTextEditor = $('#editor-container');
 
 const postTextEditorEl = $('#editor-container .ql-editor');
 
-// Represents the form for composing a post
+// Form for composing a post
 const postComposeForm = $('#post-compose');
 
-// Represents the icon element for submitting a post
+// Icon element for submitting a post
 const postSubmitIconEl = $('#send-post-icon');
 
-// Represents the input field for the post content
+// Input field for the post content
 const postTextEditorContent = $('input[name="content"]');
 
-// Represents the loading animation element for post submission
+// Loading animation element for post submission
 const loadingAnimationEl = $('#send-post-loader');
 
-// Represents the button element for submitting a post
+// Button element for submitting a post
 const postSubmitButtonEl = $('#post-submit');
 
-// Represents post validation message element
+// Post validation message element
 const postValidationMessageEl = $('#post-validation');
 
-// Represents posts rendering animation
+// Posts rendering animation
 const postRenderAnimation = $('.posts-render-animation');
 
 function validatePostComposeForm(content, location) {
@@ -65,6 +65,7 @@ async function handleDisplayingPostData(content, user) {
   const placeholderPostListItemCopy = placeholderPostListItem.clone()
     .removeAttr('data-placeholder')
     .removeClass('hidden');
+  // TODO Display dates
   placeholderPostListItemCopy.find('.content').first().html(content);
   placeholderPostListItemCopy.find('.user-avatar').first().attr('src', user.avatar);
   placeholderPostListItemCopy.find('.user-display-name').first().text(`${user.firstName} ${user.lastName}`);
@@ -122,6 +123,11 @@ async function handlePostComposeSubmit(event) {
 
     // Displays the newly created post
     await handleDisplayingPostData(content, user);
+
+    // Resets location data
+    applicationContext.resolvedLocation = null;
+    currentLocationButton.find('svg').first().removeClass('fill-blue-600');
+    currentLocationToolTipEl.addClass('hidden').text('');
   } catch (error) {
     console.error('Error rendering posts:', error);
   }
