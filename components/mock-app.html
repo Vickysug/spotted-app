@@ -229,6 +229,70 @@
                 </div>
         </div>
     </div>
+    <div id="registration-modal" class="relative p-4 w-full max-h-full w-full max-w-2xl">
+        <div class="rounded-lg bg-white shadow dark:bg-gray-700 ">
+            <!-- Modal header -->
+            <div class="flex items-start justify-between rounded-t border-b p-5 dark:border-gray-600">
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white lg:text-2xl"> Register new account </h3>
+                <button id="registration-dismiss" type="button" class="ms-auto inline-flex h-8 w-8 items-center justify-center rounded-lg bg-transparent text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white">
+                    <svg class="h-3 w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                    </svg>
+                    <span class="sr-only">Close user registration</span>
+                </button>
+            </div>
+            <!-- Modal body -->
+            <div class="p-4 md:p-5">
+                <form id="registration-form">
+                    <div class="grid gap-6 mb-6 md:grid-cols-2">
+                        <div>
+                            <label for="first-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">First name</label>
+                            <input type="text" id="first-name" name="firstName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <p id="firstname-is-invalid-feedback" class="hidden mt-2 text-sm text-red-600 dark:text-red-500">First name is empty</p>
+                        </div>
+                        <div>
+                            <label for="last-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Last name</label>
+                            <input type="text" id="last-name" name="lastName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <p id="lastname-is-invalid-feedback" class="hidden mt-2 text-sm text-red-600 dark:text-red-500">Last name is empty</p>
+                        </div>
+                        <div>
+                            <label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Username</label>
+                            <input type="text" id="username" name="username" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <p id="username-is-taken-feedback" class="hidden mt-2 text-sm text-red-600 dark:text-red-500">Username is not available</p>
+                        </div>
+                        <div>
+                            <label for="registration-email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email address</label>
+                            <input type="email" id="registration-email" name="registrationEmail" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <p id="email-is-taken-feedback" class="hidden mt-2 text-sm text-red-600 dark:text-red-500">Email address is not available</p>
+                        </div>
+                        <div class="relative w-full">
+                            <label for="registration-password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
+                            <input type="text" id="registration-password" name="registrationPassword" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <button style="top:29px" id="generate-password" type="submit" class="absolute end-0 p-2.5 text-sm font-medium text-white rounded-e-lg bg-transparent text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white ">
+                                <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><path stroke="#999" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7.833 13.6c.425.803 1.146 1.468 2.056 1.893.91.426 1.958.59 2.987.467 1.029-.122 1.983-.525 2.718-1.146L17 13.745M17 16v-2.4h-2.5m1.667-3.2c-.425-.803-1.146-1.468-2.056-1.893a5.542 5.542 0 0 0-2.987-.467c-1.029.122-1.983.525-2.718 1.146L7 10.255M7 8v2.4h2.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
+                                <span class="sr-only">Generate password</span>
+                            </button>
+                            <p id="password-not-matched-feedback" class="hidden mt-2 text-sm text-red-600 dark:text-red-500">Password does not match</p>
+
+                        </div>
+                        <div>
+                            <label for="registration-confirm-password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirm password</label>
+                            <input type="text" id="registration-confirm-password" name="confirmPassword" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        </div>
+                    </div>
+                    <!-- TODO Fix styling -->
+<!--                    <p id="registration-invalid-feedback" class="mt-2 text-sm text-red-600 dark:text-red-500">Username or password is incorrect</p>-->
+                    <div class="flex items-start mb-6">
+                        <div class="flex items-center h-5">
+                            <input id="terms-and-condition" name="termsAndCondition" type="checkbox" value="" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800" required>
+                        </div>
+                        <label for="terms-and-condition" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">I agree with the <a href="#" class="text-blue-600 hover:underline dark:text-blue-500">terms and conditions</a>. </label>
+                    </div>
+                    <button id="register-user" type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
     <div id="app-initiation-modal" class="hidden relative max-h-full w-full max-w-2xl">
         <!-- Modal content -->
         <div class="relative rounded-lg bg-white shadow dark:bg-gray-700">
@@ -284,6 +348,8 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <!-- Provides utility classes -->
 <script src="../assets/js/utils.js"></script>
+<!-- Generates password -->
+<script src="../assets/js/password-generator.js"></script>
 <!-- Provides methods to work with localStorage -->
 <script src="../assets/js/persistence-context.js"></script>
 <!-- Fetches posts from API and generate sample post data  -->
@@ -308,6 +374,8 @@
 <script src="../assets/js/resolve-location.js"></script>
 <!-- Implements post composition -->
 <script src="../assets/js/compose.js"></script>
+<!-- Implements user registration -->
+<script src="../assets/js/user-registration.js"></script>
 <!-- Initialises application with sample data -->
 <script src="../assets/js/init.js"></script>
 <script src="../assets/js/app.js"></script>
