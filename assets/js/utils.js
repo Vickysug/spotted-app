@@ -27,3 +27,16 @@ function delay(ms) {
     setTimeout(resolve, ms);
   });
 }
+
+function debounce(callback, delay) {
+  let timeoutId;
+
+  return function (...args) {
+    const context = this;
+
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => {
+      callback.apply(context, args);
+    }, delay);
+  };
+}
