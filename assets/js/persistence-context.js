@@ -111,7 +111,7 @@ function UserRepository() {
       // Save the updated user to localStorage
       saveEntityToLocalStorage(user, 'users');
 
-      return true; // Return true if saving succeeds
+      return user; // Return true if saving succeeds
     } catch (error) {
       console.error('Error saving user:', error);
       return false; // Return false if saving fails
