@@ -50,7 +50,7 @@ function validatePostComposeForm(content, location) {
   return true;
 }
 
-async function handleDisplayingPostData(content, user) {
+async function handleDisplayingPostData(post, user) {
   // Get reference to the post list placeholder element
   const placeholderPostListItem = $('.post-list-item[data-placeholder="post-item-component"]');
 
@@ -61,10 +61,11 @@ async function handleDisplayingPostData(content, user) {
     .removeAttr('data-placeholder')
     .removeClass('hidden');
   // TODO Display dates
-  placeholderPostListItemCopy.find('.content').first().html(content);
+  placeholderPostListItemCopy.find('.content').first().html(post.content);
   placeholderPostListItemCopy.find('.user-avatar').first().attr('src', user.avatar);
   placeholderPostListItemCopy.find('.user-display-name').first().text(`${user.firstName} ${user.lastName}`);
   placeholderPostListItemCopy.find('.username').first().text(`@${user.username}`);
+  placeholderPostListItemCopy.find('time').first().text(`${dayjs.unix(post.createdAt).format('DD/MM/YYYY H:mm')}`);
   postListFragment.appendChild(placeholderPostListItemCopy[0]);
 
   $('#post-list').prepend(postListFragment);
@@ -117,7 +118,7 @@ async function handlePostComposeSubmit(event) {
     postSubmitIconEl.removeClass('hidden');
 
     // Displays the newly created post
-    await handleDisplayingPostData(content, user);
+    await handleDisplayingPostData(createdPost, user);
 
     // Resets location data
     applicationContext.resolvedLocation = null;
@@ -149,7 +150,7 @@ async function renderPostList() {
       const foundUser = allUsers.find((user) => user.id === post.userId);
       if (foundUser) {
         // handleDisplayingPostData returns a promise
-        await handleDisplayingPostData(post.content, foundUser);
+        await handleDisplayingPostData(post, foundUser);
       }
     });
 
