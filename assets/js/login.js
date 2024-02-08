@@ -53,7 +53,7 @@ async function handleUserLogin(event) {
     loginButtonEl.addClass('hidden');
     submitInProgressEl.removeClass('hidden');
 
-    await delay(2000);
+    await delay(1000);
 
     if (!isCredentialsCorrect) {
       // Sets the class of the password element to indicate a validation error

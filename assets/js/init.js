@@ -12,7 +12,7 @@ async function handleAppInitialisationModal() {
     inProgressEl.removeClass('hidden');
 
     // Simulates a delay (for demonstration purposes)
-    await delay(3000);
+    await delay(1000);
 
     // Sets a flag in localStorage indicating initialisation is done
     localStorage.setItem('initialised', 'true');
