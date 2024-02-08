@@ -53,7 +53,7 @@ The application does not require any installation or build system. Please visit 
 * The supports reverse GeoCoding with Open Street Map API. It gets the user's current coordinates and resolves it to an address. 
 * The app supports Quill.js text editor
 * The app uses Modal and Dropdown objects from Flowbite library to control modals and user dropdown menu programmatically
-* The app has internal APIs/Methods to work with localStorage, implement authentication, and manage global variables.
+* The app has internal APIs/Methods to work with localStorage, implement authentication, and manage global variables. It borrows the naming convention from Spring Framework.
   * **[Persistence Context](assets/js/persistence-context.js)**: 
     * This API uses Map as data structure
     * This API allows persisting data to and retrieving from localStorage.
@@ -76,6 +76,7 @@ The application does not require any installation or build system. Please visit 
         * `saveLocation()`: Saves the given location object. `Returns` location.
         * `findAll()`: Returns an array of all locations.
         * `findLocationById()`: Finds and returns the location with the given id. Returns `false` if location does not exist.
+        * `getLocationByPostId`: Finds location for the given id. Returns `false` if location does not exist.
   * **[Security Context](assets/js/security-context.js)**
     * This API implements user authentication, generates a token and saves it to sessionStorage. 
     * The app supports user log out, which clears authentication token from sessionStorage. 

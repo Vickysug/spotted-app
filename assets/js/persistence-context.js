@@ -245,6 +245,21 @@ function LocationRepository() {
       return []; // Return an empty array if retrieval fails
     }
   };
+  this.getLocationByPostId = function (postId) {
+    try {
+      let allLocations = false;
+
+      if (postRepository.findPostById(postId)) {
+        allLocations = this.findAll();
+        return allLocations.filter((element) => element.postId === postId)[0];
+      }
+
+      return allLocations;
+    } catch (error) {
+      console.error('Error retrieving posts from localStorage:', error);
+      return false;
+    }
+  };
 }
 
 const locationRepository = new LocationRepository();
