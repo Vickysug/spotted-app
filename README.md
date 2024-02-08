@@ -41,10 +41,12 @@ The app uses the following APIs
 * [Pravatar](https://pravatar.cc/)
 
 ## Installation
-The application does not require any installation or build system. Please visit [https://vickysug.github.io/project-1/](https://vickysug.github.io/project-1/) to test the app.
+The application does not require any installation or build system. Please visit [https://vickysug.github.io/project-1/](https://vickysug.github.io/project-1/) to test the app. See Usage section below for further details.
 ## Usage
 * The app utilises an initialisation process to mimic a single page application. It retrieves data from corresponding APIs, creates objects, persists them to localStorage, and finally renders the UI.
-* Viewing posts is open to public and does not require authentication. However, to compose a new post, the app requires authentication. Please the following credentials to log in OR alternatively, you can get credential details from localStorage.
+* Viewing posts is open to public and does not require authentication. However, to compose a new post, the app requires authentication. Please use the following credentials to log in OR alternatively, if you want to test with different users, you can get credential details from localStorage.
+  * **Login Details** 
+    * `Email address`: demo@demo.com `Password`: 12345
 * The app supports new user registration with each input being checked and validated. After the form is validated and user is saved, the app will authenticate the newly created user automatically.
 * Getting current location information requires user permission. Follow the browser prompt to allow location access.
 ## Features
@@ -95,8 +97,9 @@ The application does not require any installation or build system. Please visit 
       * `formValidationError`: CSS styling for invalid for form inputs
       * `formInputDefaultStyle`: Default CSS styling for form inputs
 ## Limitations
-* The app does not currently support multi-user authentication
-* The app does not support delete or edit operations
+* The app currently does not currently support multi-user authentication
+* The app currently does not support delete or edit operations
+* The app currently does not support searching locations by name, which is also known as forward GeoCoding.
 ## Credit
 ## License
 Please refer to the LICENSE in the repo.
