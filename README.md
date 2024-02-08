@@ -14,6 +14,10 @@ This group project requires creating an app that meets the following requirement
 
 ## Deployed Application
 
+The following screencast demonstrates app's functionality.
+
+https://github.com/Vickysug/project-1/assets/16445610/9550a195-d73f-4e39-9fa0-d0f69f1895ef
+
 The deployed application is available at [https://vickysug.github.io/project-1/](https://vickysug.github.io/project-1/).
 
 ## Table of Contents
