@@ -215,7 +215,7 @@ function LocationRepository() {
       // Save the updated location to localStorage
       saveEntityToLocalStorage(location, 'locations');
 
-      return true; // Return true if saving succeeds
+      return location; // Return true if saving succeeds
     } catch (error) {
       console.error('Error saving location:', error);
       return false; // Return false if saving fails
@@ -243,6 +243,21 @@ function LocationRepository() {
     } catch (error) {
       console.error('Error retrieving location from localStorage:', error);
       return []; // Return an empty array if retrieval fails
+    }
+  };
+  this.getLocationByPostId = function (postId) {
+    try {
+      let allLocations = false;
+
+      if (postRepository.findPostById(postId)) {
+        allLocations = this.findAll();
+        return allLocations.filter((element) => element.postId === postId)[0];
+      }
+
+      return allLocations;
+    } catch (error) {
+      console.error('Error retrieving posts from localStorage:', error);
+      return false;
     }
   };
 }

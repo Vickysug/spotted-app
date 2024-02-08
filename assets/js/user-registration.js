@@ -184,7 +184,7 @@ async function handleUserRegistration(event) {
     // Create a data transfer object (DTO) from registration form data.
     const userRegistrationFormDataObject = serialiseFormData(userRegistrationForm);
 
-    await delay(2000);
+    await delay(1000);
 
     // Validates registration form
 
