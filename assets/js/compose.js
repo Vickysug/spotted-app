@@ -159,7 +159,7 @@ async function renderPostList() {
 
     postRenderAnimation.removeClass('hidden');
 
-    await delay(2000);
+    await delay(1000);
 
     // Uses map to handle asynchronous tasks and collects promises
     const displayPostPromises = allPosts.map(async (post) => {
