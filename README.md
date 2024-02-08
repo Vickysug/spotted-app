@@ -1,17 +1,5 @@
 # Spotted - Social Media Application
 
-This group project requires creating an app that meets the following requirements.
-
-## Project Requirements:
-
-* Must meet good quality coding standards (indentation, scoping, naming, etc.)
-* Does NOT use alerts, confirms, or prompts, but utilise modals.
-* Have a quality README (unique name, description, screenshots, etc.)
-* Have a clean, polished, responsive UI built with a CSS framework
-* Must use at least two new server-side APIs
-* Must be interactive (i.e: accept and respond to user input)
-* OPTIONAL: Use client-side storage to store persistent data
-
 ## What's Spotted app?
 
 Spotted is a social media application tailored for local communities. It is an online hub for staying updated on everything happening in your neighbourhood.
@@ -62,14 +50,15 @@ The application does not require any installation or build system. Please visit 
 * The app implements user authentication, generates authentication token, saves it to sessionStorage
 * The app implements user registration and supports form validation
 * The app supports reverse GeoCoding with Open Street Map API. It gets the user's current coordinates and resolves it to an address. 
-* The app supports Quill.js text editor; therefore, it supports rich text format.
-* The app uses Modal and Dropdown objects from Flowbite library to control modals and user dropdown menu programmatically
-* The app has internal APIs/Methods to work with localStorage, implement authentication, and manage global variables. It borrows the naming convention from Spring Framework.
+* The app supports Quill.js text editor. It supports rich text format.
+* The app uses Modal and Dropdown objects from Flowbite to control modals and user dropdown menu programmatically
+* The app uses Object Relational Mapping (ORM) to persist data to localStorage, implements security, and encapsulates global variables. It borrows the naming convention from Spring Framework.
   * **[Persistence Context](assets/js/persistence-context.js)**: 
-    * This API uses Map as data structure
-    * This API allows persisting data to and retrieving from localStorage.
-    * This API generates sequential ids while creating objects.
-    * Persistence context is extended by three objets:
+    * Persistence Context creates Object Relational Mapping (ORM)
+    * Uses Map as data structure
+    * Allows persisting data to and retrieving from localStorage
+    * Generates sequential ids while creating objects
+    * Persistence context is extended by three objects:
       * **UserRepository**: The object provides methods to work with the User object:
         * `saveUser()`: Saves the given user object. `Returns` user. 
         * `createUser()`: Assigns a sequential id to the user object and saves it to localStorage. `Returns` user.
@@ -89,19 +78,21 @@ The application does not require any installation or build system. Please visit 
         * `findLocationById()`: Finds and returns the location with the given id. Returns `false` if location does not exist.
         * `getLocationByPostId`: Finds location for the given id. Returns `false` if location does not exist.
   * **[Security Context](assets/js/security-context.js)**
-    * This API implements user authentication, generates a token and saves it to sessionStorage. 
-    * The app supports user log out, which clears authentication token from sessionStorage. 
+    * Security Context implements security and authentication.
+    * Uses Map as data structure
+    * Implements user authentication, generates a token and saves it to sessionStorage
+    * Supports user log out, which clears authentication token from sessionStorage
     * If localStorage is cleared while the authentication token remains in sessionStorage, the app clears sessionStorage and requires re-initialisation.
-    * This API has the following methods:
+    * Security context has the following methods:
       * `getAuthenticationToken()`: Retrieves authentication token from sessionStorage. Returns `false` if `jwt-token` key does not exist in sessionStorage.
       * `isAuthenticated()`: Checks if a given user is authenticated. Returns `true` or `false`.
       * `isCredentialsCorrect()`: Checks if a given user's credentials are correct. Returns `true` or `false`.
       * `authenticateUser()`: Authenticates user, generates a token, and save it to sessionStorage. Returns `authToken`.
       * `logout()`: Logs out the authenticated user and clears sessionStorage. Returns `false`, if logout fails.
   * **[Application Context](assets/js/application-context.js)**
-    * This API contains global variables to keep them organised and manageable. 
-    * This API has the following variables:
-      * `resolvedLocation`: Location variable that stores the user's current location
+    * Application Context encapsulates global variables to keep them organised and manageable. 
+    * It currently encapsulates the following variables:
+      * `resolvedLocation`: Location variable which stores the user's current location
       * `formValidationSuccess`: CSS styling for valid for form inputs
       * `formValidationError`: CSS styling for invalid for form inputs
       * `formInputDefaultStyle`: Default CSS styling for form inputs
