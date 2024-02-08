@@ -12,13 +12,18 @@ This group project requires creating an app that meets the following requirement
 * Must be interactive (i.e: accept and respond to user input)
 * OPTIONAL: Use client-side storage to store persistent data
 
+## What's Spotted app?
+
+Spotted is a social media application tailored for local communities. It is an online hub for staying updated on everything happening in your neighbourhood.
+Share what’s happening in your community, from the latest accidents to exciting developments, traffic updates to lost items.
+
 ## Deployed Application
 
 The following screencast demonstrates app's functionality.
 
 https://github.com/Vickysug/project-1/assets/16445610/9550a195-d73f-4e39-9fa0-d0f69f1895ef
 
-The deployed application is available at [https://vickysug.github.io/project-1/](https://vickysug.github.io/project-1/).
+The deployed application is available at [https://vickysug.github.io/spotted-app/](https://vickysug.github.io/spotted-app/).
 
 ## Table of Contents
 * [Tech Stack](#tech-stack)
@@ -45,7 +50,7 @@ The app uses the following APIs
 * [Pravatar](https://pravatar.cc/)
 
 ## Installation
-The application does not require any installation or build system. Please visit [https://vickysug.github.io/project-1/](https://vickysug.github.io/project-1/) to test the app. See Usage section below for further details.
+The application does not require any installation or build system. Please visit [https://vickysug.github.io/spotted-app/](https://vickysug.github.io/spotted-app/) to test the app. See Usage section below for further details.
 ## Usage
 * The app utilises an initialisation process to mimic a single page application. It retrieves data from corresponding APIs, creates objects, persists them to localStorage, and finally renders the UI.
 * Viewing posts is open to public and does not require authentication. However, to compose a new post, the app requires authentication. Please use the following credentials to log in OR alternatively, if you want to test with different users, you can get credential details from localStorage.
