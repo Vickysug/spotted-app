@@ -52,15 +52,15 @@ The application does not require any installation or build system. Please visit 
 ## Features
 * The app implements user authentication, generates authentication token, saves it to sessionStorage
 * The app implements user registration and supports form validation
-* The supports reverse GeoCoding with Open Street Map API. It gets the user's current coordinates and resolves it to an address. 
-* The app supports Quill.js text editor
+* The app supports reverse GeoCoding with Open Street Map API. It gets the user's current coordinates and resolves it to an address. 
+* The app supports Quill.js text editor; therefore, it supports rich text format.
 * The app uses Modal and Dropdown objects from Flowbite library to control modals and user dropdown menu programmatically
 * The app has internal APIs/Methods to work with localStorage, implement authentication, and manage global variables. It borrows the naming convention from Spring Framework.
   * **[Persistence Context](assets/js/persistence-context.js)**: 
     * This API uses Map as data structure
     * This API allows persisting data to and retrieving from localStorage.
     * This API generates sequential ids while creating objects.
-    * It is extended by three objets:
+    * Persistence context is extended by three objets:
       * **UserRepository**: The object provides methods to work with the User object:
         * `saveUser()`: Saves the given user object. `Returns` user. 
         * `createUser()`: Assigns a sequential id to the user object and saves it to localStorage. `Returns` user.
@@ -82,16 +82,16 @@ The application does not require any installation or build system. Please visit 
   * **[Security Context](assets/js/security-context.js)**
     * This API implements user authentication, generates a token and saves it to sessionStorage. 
     * The app supports user log out, which clears authentication token from sessionStorage. 
-    * If localStorage is cleared, while the authentication token remains in sessionStorage, the app clears sessionStorage and requires re-initialisation.
-    * The API has the following methods:
+    * If localStorage is cleared while the authentication token remains in sessionStorage, the app clears sessionStorage and requires re-initialisation.
+    * This API has the following methods:
       * `getAuthenticationToken()`: Retrieves authentication token from sessionStorage. Returns `false` if `jwt-token` key does not exist in sessionStorage.
       * `isAuthenticated()`: Checks if a given user is authenticated. Returns `true` or `false`.
-      * `isCredentialsCorrect()`: Checks if given user credentials are correct. Returns `true` or `false`.
+      * `isCredentialsCorrect()`: Checks if a given user's credentials are correct. Returns `true` or `false`.
       * `authenticateUser()`: Authenticates user, generates a token, and save it to sessionStorage. Returns `authToken`.
       * `logout()`: Logs out the authenticated user and clears sessionStorage. Returns `false`, if logout fails.
   * **[Application Context](assets/js/application-context.js)**
     * This API contains global variables to keep them organised and manageable. 
-    * It has the following variables:
+    * This API has the following variables:
       * `resolvedLocation`: Location variable that stores the user's current location
       * `formValidationSuccess`: CSS styling for valid for form inputs
       * `formValidationError`: CSS styling for invalid for form inputs
@@ -99,7 +99,8 @@ The application does not require any installation or build system. Please visit 
 ## Limitations
 * The app currently does not currently support multi-user authentication
 * The app currently does not support delete or edit operations
-* The app currently does not support searching locations by name, which is also known as forward GeoCoding.
+* The app currently does not support searching locations by name, which is also known as forward GeoCoding
+* The app currently only searches through available posts in the DOM. It does not search in localStorage
 ## Credit
 ## License
 Please refer to the LICENSE in the repo.
