@@ -1,4 +1,4 @@
-/* global messageModal, delay,handleFetchingPostsFromApi,
+/* global messageModal, delay,handleFetchingPostsFromApi, User,userRepository,
 handleFetchingUsersFromApi, clearTokenFromSessionStorage, renderPostList */
 const initiateEl = $('#initiate'); // Element used to initiate data generation.
 const inProgressEl = $('#in-progress'); // Element indicating progress of data generation
@@ -32,6 +32,10 @@ async function handleAppInitialisationModal() {
 
 async function handleDataInitialisation() {
   try {
+    const demoUser = new User('Walter Joseph', 'Kovacs', 'demo@demo.com', 'rorschach', '12345', `https://i.pravatar.cc/150?u=${crypto.randomUUID()}`);
+
+    userRepository.createUser(demoUser);
+
     // Fetch users and posts concurrently
     const fetchedUsersPromise = handleFetchingPostsFromApi();
     const fetchedPostsPromise = handleFetchingUsersFromApi();
